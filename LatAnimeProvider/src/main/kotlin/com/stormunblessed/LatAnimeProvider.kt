@@ -22,7 +22,7 @@ class LatAnimeProvider : MainAPI() {
     }
 
     override var mainUrl = "https://latanime.org"
-    override var name = "LatAnime"
+    override var name = "LatAnime A"
     override var lang = "es"
     override val hasMainPage = true
     override val hasChromecastSupport = true
