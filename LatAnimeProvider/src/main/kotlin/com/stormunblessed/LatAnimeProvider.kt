@@ -51,7 +51,7 @@ class LatAnimeProvider : MainAPI() {
             )
         }
     }
- 
+  
     override suspend fun load(url: String): LoadResponse {
         val doc = app.get(url, timeout = 120).document
         val poster = doc.selectFirst(".chapterpic img")!!.attr("src")
