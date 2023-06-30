@@ -33,62 +33,6 @@ class LatAnimeProvider : MainAPI() {
         TvType.Anime,
     )
 
-/*
-    override suspend fun getMainPage(page: Int, request : MainPageRequest): HomePageResponse {
-        val urls = listOf(
-            Pair("$mainUrl/emision", "En emisión"),
-            Pair(
-                "$mainUrl/animes?categoria=Película&genero=false&fecha=false&letra=false",
-                "Peliculas"
-            ),
-            Pair("$mainUrl/animes", "Animes"),
-        )
-
-
-        val items = ArrayList<HomePageList>()
-        val isHorizontal = true
-        items.add(
-            HomePageList(
-                "Capítulos actualizados",
-                app.get(mainUrl, timeout = 120).document.select(".col-6").map {
-                    val title = it.selectFirst("p.animetitles")?.text() ?: it.selectFirst(".animetitles")?.text() ?: ""
-                    val poster =
-                        it.selectFirst("img.animemainimg")?.attr("data-src")
-                            ?: it.selectFirst("img.lozad.animeimghv")?.attr("data-src")
-                            ?: ""
-
-                    val epRegex = Regex("episodio-(\\d+)")
-                    val url = it.selectFirst("a")?.attr("href")!!.replace("ver/", "anime/")
-                        .replace(epRegex, "sub-espanol")
-                    val epNum = (it.selectFirst(".positioning h5")?.text() ?: it.selectFirst("div.positioning p")?.text())?.toIntOrNull()
-                    newAnimeSearchResponse(title, url) {
-                        this.posterUrl = fixUrl(poster)
-                        addDubStatus(getDubStatus(title), epNum)
-                    }
-                }, isHorizontal)
-        )
-
-        urls.apmap { (url, name) ->
-            val home = app.get(url, timeout = 120).document.select(".my-3").map {
-                val title = it.selectFirst(".my-1")!!.text()
-                val poster =
-                    it.selectFirst("img.lozad")?.attr("data-src")
-                        ?: ""
-
-                newAnimeSearchResponse(title, fixUrl(it.selectFirst("a")!!.attr("href"))) {
-                    this.posterUrl = fixUrl(poster)
-                    addDubStatus(getDubStatus(title))
-                }
-            }
-
-            items.add(HomePageList(name, home))
-        }
-
-        if (items.size <= 0) throw ErrorLoadingException()
-        return HomePageResponse(items)
-        
-    }
-*/
     override suspend fun search(query: String): List<SearchResponse> {
         return app.get("$mainUrl/buscar?q=$query", timeout = 120).document.select(".my-3").map { //.col-6
             val title = it.selectFirst(".my-1")!!.text() //.setistitles
@@ -107,7 +51,7 @@ class LatAnimeProvider : MainAPI() {
             )
         }
     }
-
+ 
     override suspend fun load(url: String): LoadResponse {
         val doc = app.get(url, timeout = 120).document
         val poster = doc.selectFirst(".chapterpic img")!!.attr("src")
