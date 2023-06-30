@@ -33,7 +33,7 @@ class LatAnimeProvider : MainAPI() {
         TvType.Anime,
     )
 
-
+/*
     override suspend fun getMainPage(page: Int, request : MainPageRequest): HomePageResponse {
         val urls = listOf(
             Pair("$mainUrl/emision", "En emisión"),
@@ -88,7 +88,7 @@ class LatAnimeProvider : MainAPI() {
         return HomePageResponse(items)
         
     }
-
+*/
     override suspend fun search(query: String): List<SearchResponse> {
         return app.get("$mainUrl/buscar?q=$query", timeout = 120).document.select(".my-3").map { //.col-6
             val title = it.selectFirst(".my-1")!!.text() //.setistitles
