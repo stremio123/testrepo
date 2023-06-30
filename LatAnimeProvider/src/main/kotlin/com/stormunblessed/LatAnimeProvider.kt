@@ -24,7 +24,7 @@ class LatAnimeProvider : MainAPI() {
     override var mainUrl = "https://latanime.org"
     override var name = "LatAnime"
     override var lang = "es"
-    override val hasMainPage = false
+    override val hasMainPage = false //true
     override val hasChromecastSupport = true
     override val hasDownloadSupport = true
     override val supportedTypes = setOf(
@@ -34,10 +34,10 @@ class LatAnimeProvider : MainAPI() {
     )
 
     override suspend fun search(query: String): List<SearchResponse> {
-        return app.get("$mainUrl/buscar?q=$query", timeout = 120).document.select(".my-3").map { //.col-6
+        return app.get("$mainUrl/buscar?q=$query", timeout = 120).document.select(".col-6.my-3").map { //.col-6
             val title = it.selectFirst(".my-1")!!.text() //.setistitles
             val href = fixUrl(it.selectFirst("a")!!.attr("href"))
-            val image = it.selectFirst("img.img-fluid2")!!.attr("src") //img.animemainimg
+            val image = it.selectFirst("img.img-fluid2.shadow-sm")!!.attr("src") //img.animemainimg
             AnimeSearchResponse(
                 title,
                 href,
