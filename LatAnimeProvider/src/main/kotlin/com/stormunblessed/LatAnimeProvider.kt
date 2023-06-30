@@ -149,4 +149,3 @@ class LatAnimeProvider : MainAPI() {
         return true
     }
 }
- 
