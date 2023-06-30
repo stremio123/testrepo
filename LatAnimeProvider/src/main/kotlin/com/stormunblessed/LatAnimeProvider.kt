@@ -67,7 +67,7 @@ class LatAnimeProvider : MainAPI() {
                     }
                 }, isHorizontal)
         )
-/*
+
         urls.apmap { (url, name) ->
             val home = app.get(url, timeout = 120).document.select(".my-3").map {
                 val title = it.selectFirst(".my-1")!!.text()
@@ -86,7 +86,7 @@ class LatAnimeProvider : MainAPI() {
 
         if (items.size <= 0) throw ErrorLoadingException()
         return HomePageResponse(items)
-        */
+        
     }
 
     override suspend fun search(query: String): List<SearchResponse> {
