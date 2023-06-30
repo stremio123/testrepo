@@ -33,6 +33,7 @@ class LatAnimeProvider : MainAPI() {
         TvType.Anime,
     )
 
+
     override suspend fun getMainPage(page: Int, request : MainPageRequest): HomePageResponse {
         val urls = listOf(
             Pair("$mainUrl/emision", "En emisión"),
@@ -43,7 +44,7 @@ class LatAnimeProvider : MainAPI() {
             Pair("$mainUrl/animes", "Animes"),
         )
 
-/*
+
         val items = ArrayList<HomePageList>()
         val isHorizontal = true
         items.add(
@@ -66,7 +67,7 @@ class LatAnimeProvider : MainAPI() {
                     }
                 }, isHorizontal)
         )
-*/
+
         urls.apmap { (url, name) ->
             val home = app.get(url, timeout = 120).document.select(".my-3").map {
                 val title = it.selectFirst(".my-1")!!.text()
