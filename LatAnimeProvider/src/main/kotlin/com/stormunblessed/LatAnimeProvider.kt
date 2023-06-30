@@ -43,6 +43,7 @@ class LatAnimeProvider : MainAPI() {
             Pair("$mainUrl/animes", "Animes"),
         )
 
+/*
         val items = ArrayList<HomePageList>()
         val isHorizontal = true
         items.add(
@@ -65,10 +66,10 @@ class LatAnimeProvider : MainAPI() {
                     }
                 }, isHorizontal)
         )
-
+*/
         urls.apmap { (url, name) ->
-            val home = app.get(url, timeout = 120).document.select(".col-6").map {
-                val title = it.selectFirst(".seristitles")!!.text()
+            val home = app.get(url, timeout = 120).document.select(".my-3").map {
+                val title = it.selectFirst(".my-1")!!.text()
                 val poster =
                     it.selectFirst("img.lozad")?.attr("data-src")
                         ?: ""
@@ -88,9 +89,9 @@ class LatAnimeProvider : MainAPI() {
 
     override suspend fun search(query: String): List<SearchResponse> {
         return app.get("$mainUrl/buscar?q=$query", timeout = 120).document.select(".col-6").map {
-            val title = it.selectFirst(".seristitles")!!.text()
+            val title = it.selectFirst(".my-1")!!.text() //.setistitles
             val href = fixUrl(it.selectFirst("a")!!.attr("href"))
-            val image = it.selectFirst("img.animemainimg")!!.attr("src")
+            val image = it.selectFirst("img.img-fluid2")!!.attr("src") //img.animemainimg
             AnimeSearchResponse(
                 title,
                 href,
