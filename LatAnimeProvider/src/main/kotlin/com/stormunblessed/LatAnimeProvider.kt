@@ -69,7 +69,7 @@ class LatAnimeProvider : MainAPI() {
         )
 
         urls.apmap { (url, name) ->
-            val home = app.get(url, timeout = 120).document.select(".my-3").map {
+            val home = app.get(url, timeout = 1000).document.select(".my-3").map {
                 val title = it.selectFirst(".my-1")!!.text()
                 val poster =
                     it.selectFirst("img.lozad")?.attr("data-src")
